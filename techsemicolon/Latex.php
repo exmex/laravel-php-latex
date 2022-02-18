@@ -151,7 +151,7 @@ class Latex
 
         if (!$process->isSuccessful()) {
             
-            throw new LatextException($process->getOutput());
+            throw new LatextException($process->getErrorOutput());
         }
 
         $this->renderedTex = \File::get(dirname(__FILE__).'/dryrun.tex');
@@ -304,7 +304,7 @@ class Latex
 
     	if(!\File::exists($logFile)){
 
-    		throw new LatextException($process->getOutput());
+    		throw new LatextException($process->getErrorOutput());
     	}
 
     	$error = \File::get($tmpfname.'.log');
