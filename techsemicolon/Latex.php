@@ -2,6 +2,7 @@
 
 namespace Techsemicolon;
 
+use Illuminate\Support\Str;
 use Techsemicolon\LatextException;
 use Techsemicolon\LatexPdfWasGenerated;
 use Techsemicolon\LatexPdfFailed;
@@ -233,7 +234,11 @@ class Latex
      */
     private function generate(){
 
-    	$fileName = str_random(10);
+        if(function_exists("str_random"))
+        {
+            $fileName = str_random(10);
+        }else
+    	    $fileName = Str::random(10);
         $tmpfname = tempnam(sys_get_temp_dir(), $fileName);
         $tmpDir = sys_get_temp_dir();
         chmod($tmpfname, 0755);
